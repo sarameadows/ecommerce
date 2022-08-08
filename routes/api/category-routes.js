@@ -13,7 +13,12 @@ router.get('/', (req, res) => {
         attributes: ['product_name']
       }
     ]
-  });
+  })
+    .then(categoryData => res.json(categoryData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    })
 });
 
 // get one specific category and associated products
@@ -30,6 +35,17 @@ router.get('/:id', (req, res) => {
       }
     ]
   })
+    .then(categoryData => {
+      if (!categoryData) {
+        res.status(404).json({message: 'No category found with this id'});
+        return;
+      }
+      res.json(categoryData)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(404).json(err);
+    })
 });
 
 // create a new category
