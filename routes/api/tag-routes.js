@@ -59,8 +59,7 @@ router.post('/', (req, res) => {
 
 // update a tag's name by its id
 router.put('/:id', (req, res) => {
-  Tag.update({
-    individualHooks: true,
+  Tag.update(req.body, {
     where: {
       id: req.params.id
     }
@@ -82,7 +81,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   Tag.destroy({
     where: {
-      id: req.body.id
+      id: req.params.id
     }
   })
     .then(dbUserData => {

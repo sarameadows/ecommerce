@@ -59,6 +59,7 @@ router.post('/', (req, res) => {
       res.status(500).json(err);
     });
 });
+
 // update a category by its `id` value
 router.put('/:id', (req, res) => {
   Category.update(req.body, {
@@ -92,12 +93,12 @@ router.delete('/:id', (req, res) => {
         res.status(404).json({message: "No category found with this id"});
         return;
       }
-      res.json(categoryData)
+      res.json(categoryData);
     })
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
-    })
+    });
 });
 
 module.exports = router;
